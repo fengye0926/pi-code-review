@@ -1,6 +1,6 @@
 {
   "name": "@fengye0926/pi-code-review",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ECC code review capability ported to pi: specialized reviewer subagents, review and verification commands, bundled knowledge skills, and a lane-routing trigger skill.",
   "license": "MIT",
   "keywords": ["pi-package", "pi", "code-review", "ecc"],
