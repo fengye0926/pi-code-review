@@ -9,7 +9,7 @@ ECC 的 code review 能力，迁移为 pi（[pi](https://github.com/earendil-wor
 | 层 | 内容 | 说明 |
 |---|---|---|
 | 上游原文 | 15 个 agent、6 个审查命令、31 个技能（laravel ×3、`mysql-patterns`、`postgres-patterns`、`database-migrations`、`security-review`、`coding-standards`、`frontend-patterns`、`backend-patterns`、`golang-*`、`python-*`、`tdd-workflow`、`vue-patterns`、`react-patterns`、`react-testing`、`accessibility`、`santa-method`、`verification-loop`、`springboot-*`、`quarkus-*`、`java-coding-standards`、`jpa-patterns`）、`rules/react` + `rules/vue` 全量规则、`reference/code-review-rule.md` | ECC 为准，只改宿主绑定与引用标注 |
-| 本地撰写 / 改编 | `agents/webman-reviewer.md`、`skills/ecc-code-review/`、`skills/orch-review/`、`skills/react-rules/`、`skills/vue-rules/`、`prompts/orch-review.md`、`prompts/santa-loop.md`、`prompts/verify.md` | 常驻 worker 审查、路由入口、orch-review / santa-loop / verify 的 pi 适配、规则包封装 |
+| 本地撰写 / 改编 | `agents/webman-reviewer.md`、`skills/code-review-skill/`、`skills/orch-review/`、`skills/react-rules/`、`skills/vue-rules/`、`prompts/orch-review.md`、`prompts/santa-loop.md`、`prompts/verify.md` | 常驻 worker 审查、路由入口、orch-review / santa-loop / verify 的 pi 适配、规则包封装 |
 
 ## 技术栈覆盖（v1.3）
 
@@ -47,7 +47,7 @@ prompts/                    9 个命令（pi prompt 模板）
   python-review.md            /python-review — Python 专项
 skills/                    35 个（按需加载）
   路由与流程
-    ecc-code-review/          审查车道路由 + 合并规则（本地撰写）
+    code-review-skill/          审查车道路由 + 合并规则（本地撰写）
     orch-review/              对抗验证审查 + pi workflow 脚本（本地改编）
     santa-method/             双独立 reviewer 方法论（上游原文，Pattern A 已 pi 化）
     verification-loop/        六阶段验证（上游原文，措辞已 pi 化）
@@ -96,7 +96,7 @@ pi install git:github.com/fengye0926/pi-code-review
 
 ## 触发接线（可选）
 
-pi 没有 always-on 规则注入；`ecc-code-review` 路由技能靠 description 触发。若希望每个项目稳定地在改完代码后走审查，在项目 `AGENTS.md` 里加一段习惯约定：
+pi 没有 always-on 规则注入；`code-review-skill` 路由技能靠 description 触发。若希望每个项目稳定地在改完代码后走审查，在项目 `AGENTS.md` 里加一段习惯约定：
 
 ```markdown
 ## Review habit
@@ -115,7 +115,7 @@ pi 没有 always-on 规则注入；`ecc-code-review` 路由技能靠 description
 - `rules/<language>/*` 语言规则（react / vue 规则仅在 agent、prompt 中作为上游引用标注）。
 - 其余栈外框架的知识包与命令未迁移（Kotlin / Perl / Rust / Dart-Flutter / .NET / NestJS / Rails 等的 pattern、security、tdd 技能，以及对应语言 reviewer）。
 - 未迁移的上游命令：`/security-scan`（依赖 AgentShield 商业扫描器）、`/go-test`、`/go-build`、`/react-test`、`/react-build`、`/build-fix`、`/epic-review` 等。
-- 上游 `.pi` 扩展与 hooks（always-on 规则注入、hook runtime）；本包以 `reference/` 存档加 `ecc-code-review` 路由技能替代。
+- 上游 `.pi` 扩展与 hooks（always-on 规则注入、hook runtime）；本包以 `reference/` 存档加 `code-review-skill` 路由技能替代。
 
 ## 改了什么
 

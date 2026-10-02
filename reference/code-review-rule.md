@@ -1,6 +1,6 @@
 <!-- source: affaan-m/ECC@c70874fae9eb0e5ad0365beb7e2955899fd1d30f rules/common/code-review.md (MIT)
      Archived verbatim for reference. Not mounted always-on; the review-trigger
-     policy lines are surfaced through skills/ecc-code-review instead. -->
+     policy lines are surfaced through skills/code-review-skill instead. -->
 
 # Code Review Standards
 

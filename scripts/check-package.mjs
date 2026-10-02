@@ -34,7 +34,7 @@ const LOCAL_FILES = new Set([
   "prompts/orch-review.md",
   "prompts/santa-loop.md",
   "prompts/verify.md",
-  "skills/ecc-code-review/SKILL.md",
+  "skills/code-review-skill/SKILL.md",
   "skills/orch-review/SKILL.md",
   "skills/react-rules/SKILL.md",
   "skills/vue-rules/SKILL.md",
@@ -169,7 +169,8 @@ if (runPi) {
         if (!names.has(name)) fail(`pi load test: prompt /${name} was not discovered`);
       }
       for (const rel of skills) {
-        const name = rel.split("/")[1];
+        const { fields } = frontmatterOf(join(root, rel));
+        const name = fields.get("name") || rel.split("/")[1];
         if (!names.has(`skill:${name}`)) fail(`pi load test: skill ${name} was not discovered`);
       }
     }

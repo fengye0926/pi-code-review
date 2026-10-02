@@ -3,6 +3,13 @@
 All notable changes to `@fengye0926/pi-code-review`. Source of truth for upstream
 porting decisions is the migration README; this file tracks packaged capability.
 
+## 1.0.8
+
+- Lane-routing skill is now `code-review-skill` (`/skill:code-review-skill`),
+  replacing the upstream `ecc-` prefix in the invocation name.
+- `scripts/check-package.mjs` live load test resolves expected skill names from
+  each `SKILL.md` frontmatter instead of the directory name.
+
 ## 1.0.7
 
 - Package guardrails (`scripts/check-package.mjs`): frontmatter sanity, expected
@@ -53,6 +60,6 @@ porting decisions is the migration README; this file tracks packaged capability.
 
 - Initial port of the ECC code review capability to pi: general reviewer plus
   five quality analyzers, `/code-review` and `/review-pr`, the lane-routing
-  `ecc-code-review` skill, and the archived `reference/code-review-rule.md`.
+  `code-review-skill` skill, and the archived `reference/code-review-rule.md`.
 - Agents carry no model or thinking-level binding; they inherit the calling
   session (provider-agnostic by design).

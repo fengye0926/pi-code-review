@@ -1,5 +1,5 @@
 ---
-name: ecc-code-review
+name: code-review-skill
 description: Independent code review with ECC-style specialized reviewers. Use when the user asks to review code changes or a PR, wants an independent quality/security pass on recent work, or after completing a non-trivial implementation. Routes by lane - general, TypeScript/JS, Vue+TypeScript, React+TypeScript, PHP, Java, Go, Python, database, security, or the full PR review commands.
 ---
 
