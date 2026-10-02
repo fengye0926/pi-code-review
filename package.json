@@ -1,9 +1,12 @@
 {
   "name": "@fengye0926/pi-code-review",
-  "version": "1.0.6",
-  "description": "ECC code review capability ported to pi: specialized reviewer subagents, review and verification commands, bundled knowledge skills, and a lane-routing trigger skill.",
+  "version": "1.0.7",
+  "description": "ECC code review capability ported to pi: 16 reviewer/analyzer subagents, 9 review and verification prompt commands (incl. /orch-review and /santa-loop), 35 skills, and a lane-routing trigger skill.",
   "license": "MIT",
   "keywords": ["pi-package", "pi", "code-review", "ecc"],
+  "scripts": {
+    "check": "node scripts/check-package.mjs --no-pi"
+  },
   "pi": {
     "skills": ["./skills"],
     "prompts": ["./prompts"],
