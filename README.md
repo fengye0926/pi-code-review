@@ -11,7 +11,7 @@ ECC 的 code review 能力，迁移为 pi（[pi](https://github.com/earendil-wor
 | 上游原文 | 15 个 agent、6 个审查命令、31 个技能（laravel ×3、`mysql-patterns`、`postgres-patterns`、`database-migrations`、`security-review`、`coding-standards`、`frontend-patterns`、`backend-patterns`、`golang-*`、`python-*`、`tdd-workflow`、`vue-patterns`、`react-patterns`、`react-testing`、`accessibility`、`santa-method`、`verification-loop`、`springboot-*`、`quarkus-*`、`java-coding-standards`、`jpa-patterns`）、`rules/react` + `rules/vue` 全量规则、`reference/code-review-rule.md` | ECC 为准，只改宿主绑定与引用标注 |
 | 本地撰写 / 改编 | `agents/webman-reviewer.md`、`skills/code-review-skill/`、`skills/orch-review/`、`skills/react-rules/`、`skills/vue-rules/`、`prompts/orch-review.md`、`prompts/santa-loop.md`、`prompts/verify.md` | 常驻 worker 审查、路由入口、orch-review / santa-loop / verify 的 pi 适配、规则包封装 |
 
-## 技术栈覆盖（v1.3）
+## 技术栈覆盖
 
 Vue、React、TypeScript/JavaScript、PHP（上游 `php-reviewer` 覆盖 Laravel / 通用 PHP；webman / workerman 由 `webman-reviewer` 覆盖）、MySQL（知识经 `mysql-patterns` 技能）、Go、Python、Java（Spring / Quarkus）、PostgreSQL / Supabase（`database-reviewer`）。安全、数据库迁移、通用规范、前端/后端模式的配套知识包已随包提供。
 
