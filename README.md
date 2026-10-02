@@ -1,7 +1,8 @@
 # @fengye0926/pi-code-review
 
-ECC 的 code review 能力，迁移为 pi（[pi](https://github.com/earendil-works/pi)）可独立安装的本地包。
+ECC 的 code review 能力，迁移为 [pi](https://github.com/earendil-works/pi) 可独立安装的包：审查员阵容 + 多档审查命令 + 按需加载的知识包。
 
+**仓库**：[fengye0926/pi-code-review](https://github.com/fengye0926/pi-code-review)（MIT）
 **来源**：[affaan-m/ECC](https://github.com/affaan-m/ECC) @ `c70874f`（MIT）。每个迁移文件头部有 `source:` 标注；正文以上游原文为准，只做宿主绑定、路径替换和上游专有资产的引用标注（见[改了什么](#改了什么)）。仓库不做模型 / 思考档位绑定：不出现任何 `model:`、`thinking:` 与具体型号/provider 名。
 
 ## 来源分层
@@ -45,9 +46,9 @@ prompts/                    9 个命令（pi prompt 模板）
   react-review.md             /react-review — React 专项
   go-review.md                /go-review    — Go 专项
   python-review.md            /python-review — Python 专项
-skills/                    35 个（按需加载）
+skills/                    35 个（目录名 + 描述常驻 system prompt，约 3.5K tokens；正文按需读取）
   路由与流程
-    code-review-skill/          审查车道路由 + 合并规则（本地撰写）
+    code-review-skill/        审查车道路由 + 合并规则（本地撰写）
     orch-review/              对抗验证审查 + pi workflow 脚本（本地改编）
     santa-method/             双独立 reviewer 方法论（上游原文，Pattern A 已 pi 化）
     verification-loop/        六阶段验证（上游原文，措辞已 pi 化）
@@ -73,11 +74,16 @@ reference/
 
 需要 pi ≥ 0.99 与 pi-subagents 扩展（读取 `pi.subagents.agents` 的 agents 挂载声明）。
 
+> `/orch-review`（对抗验证 workflow）依赖后台子代理。pi 1.0 下请使用已修复
+> `@earendil-works/pi-agent-core/node` 依赖的 pi-subagents（git 版
+> `git:github.com/nicobailon/pi-subagents`）；旧 npm 版会导致 workflow 以
+> fail-closed 的 `incomplete` 结果结束。
+
 ```bash
 # npm（发布后）
 pi install npm:@fengye0926/pi-code-review
 
-# 或从 git 安装（GitHub 仓库建议同步改名为 pi-code-review）
+# 或从 git 安装
 pi install git:github.com/fengye0926/pi-code-review
 ```
 
@@ -123,7 +129,7 @@ pi 没有 always-on 规则注入；`code-review-skill` 路由技能靠 descripti
 - 文档引用路径：`.claude/*` 等 → `AGENTS.md` / `CONTEXT.md` / `.scratch/`；上游专有资产统一标注"未随包提供"
 - 触发用语：上游自动触发语义 → 显式触发语义（由调用方决定）
 - `/orch-review`：上游 Claude Code Workflow（`agent()`/`parallel()`/`schema`）重写为 pi-subagents workflow 脚本（`runs.all` + `outputSchema`，纯 Promise 链，无嵌套 async），维度映射到本包 reviewer，并新增 database 条件维度与语言自动探测
-- 伴侣知识包按栈随包提供：Go / Python / 前端（React / Vue）/ TDD / 可访问性 + `rules/react`、`rules/vue` 规则包；reviewer 的 Reference 全部改指本地技能
+- 伴侣知识包按栈随包提供：安全（`security-review`）、数据库（`postgres-patterns` / `database-migrations`）、通用规范（`coding-standards` / `frontend-patterns` / `backend-patterns`）、Go / Python / TDD / 可访问性，以及 `react-rules`、`vue-rules` 规则包；reviewer 的 Reference 全部改指本地技能
 - `santa-method` 与 `verification-loop` 移植：Pattern A 改为 pi `subagent`，`/santa-loop`、`/verify` 命令适配（不做模型绑定、不自动 push）
 - Java 伴侣知识包随包提供：`springboot-*`、`quarkus-*`、`java-coding-standards`、`jpa-patterns`，java-reviewer 的 Reference 全部改指本地技能
 - 每个上游文件加入 `source:` 标注；本地撰写文件注明本地来源
@@ -139,3 +145,8 @@ node scripts/check-package.mjs --no-pi  # 仅静态检查（CI 用）
 `model:` / `thinking:` 绑定、`orch-review` workflow 语法；本地有 `pi` 时会额外验证
 9 个命令与 35 个技能确实被挂载。GitHub Actions（`.github/workflows/ci.yml`）跑
 `--no-pi` 版本。
+
+## License
+
+MIT。上游 ECC 版权与衍生说明见 [`LICENSE`](./LICENSE)；每个迁移文件的 `source:`
+标注标出来源。
